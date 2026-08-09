@@ -1,23 +1,25 @@
 # Azure Terraform Landing Zone
 
+A modular Azure Landing Zone built with Terraform to demonstrate Infrastructure as Code (IaC), Azure networking, monitoring, governance, security, storage, and data services.
+
 ## Architecture
 
-![Azure Terraform Landing Zone](docs/landingzone_diagram_cleaned.png)
+![Azure Terraform Landing Zone Architecture](docs/landingzone_diagram_cleaned.png)
 
 ## Overview
 
 This project provisions an Azure landing zone across four dedicated resource groups:
 
-- **network-group** – Virtual networks, subnets, NSG controls, and network governance
-- **logging-group** – Central Log Analytics workspace
-- **storage-group** – Data engineering Storage Account with hierarchical namespace enabled
-- **security-group** – Security Log Analytics workspace, Storage Account, Key Vault, and Azure SQL environments
+- **network-group** – Virtual networks, subnets, and network governance
+- **logging-group** – Centralized Log Analytics workspace
+- **storage-group** – Data engineering storage resources
+- **security-group** – Security monitoring, Key Vault, Storage Account, and Azure SQL resources
 
 ## Networking
 
 ### Hub VNet
 
-`hub-vnet` – `10.0.0.0/16`
+- `hub-vnet` – `10.0.0.0/16`
 
 Reserved infrastructure subnets:
 
@@ -27,24 +29,21 @@ Reserved infrastructure subnets:
 
 ### Application VNet
 
-`app-vnet` – `10.1.0.0/16`
+- `app-vnet` – `10.1.0.0/16`
 
 Workload subnets:
 
 - `web-subnet` – `10.1.1.0/24`
 - `app-subnet` – `10.1.2.0/24`
 
-The workload subnets are associated with an NSG containing inbound rules for:
-
-- TCP 80
-- TCP 22
+Network Security Groups (NSGs) are applied to workload subnets to control inbound traffic.
 
 ## Monitoring
 
 Two Log Analytics workspaces are deployed:
 
-- `central-log-workspace` in `logging-group`
-- `security-log-workspace` in `security-group`
+- `central-log-workspace`
+- `security-log-workspace`
 
 ## Storage
 
@@ -52,15 +51,13 @@ Two Log Analytics workspaces are deployed:
 
 - StorageV2
 - Standard LRS
-- Hierarchical namespace disabled
-- Deployed to `security-group`
+- Hierarchical Namespace Disabled
 
 ### Data Engineering Storage
 
 - StorageV2
 - Standard LRS
-- Hierarchical namespace enabled
-- Deployed to `storage-group`
+- Hierarchical Namespace Enabled (Data Lake Gen2)
 
 ## Security and Governance
 
@@ -69,34 +66,47 @@ The landing zone includes:
 - Azure Key Vault
 - Azure Policy
 - Network Security Groups
-- Resource tagging
+- Resource Tagging
 
-The network resource group has an Azure Policy assignment restricting allowed resource types.
+Azure Policy is assigned to restrict allowed network resource types within the network resource group.
 
 ## Data Platform
 
-Two Azure SQL environments are configured in `security-group`:
+Two Azure SQL environments are configured:
 
 - `centralserver`
 - `engserver`
 
-Both use the S0 SKU.
+Both are deployed using the S0 SKU.
 
-## Terraform
+## Terraform Module Structure
 
-The infrastructure is organized into reusable Terraform modules to separate concerns such as:
+```text
+modules/
+├── general/
+│   └── resourcegroup/
+├── networking/
+│   └── vnet/
+├── monitoring/
+│   └── logging/
+├── storage/
+│   ├── azurestorage/
+│   └── sqldatabases/
+├── security/
+└── governance/
+    └── policy/
+```
 
-- Resource groups
-- Networking
-- Monitoring
-- Storage
-- Security
-- SQL
-- Governance
+## Skills Demonstrated
 
-## Deployment
-
-Initialize Terraform:
-
-```bash
-terraform init
+- Terraform Module Design
+- Infrastructure as Code (IaC)
+- Azure Landing Zone Architecture
+- Azure Networking
+- Network Segmentation
+- Azure Policy Governance
+- Azure Monitor & Log Analytics
+- Azure Storage & Data Lake Gen2
+- Azure Key Vault
+- Azure SQL
+- Resource Tagging and Governance
