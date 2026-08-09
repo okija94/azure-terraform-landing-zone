@@ -1,0 +1,17 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Variables
+*.tfvars
+*.auto.tfvars
+
+# Secrets
+*.pem
+*.key
+*.pfx
+
+# Mac
+.DS_Store
