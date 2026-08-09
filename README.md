@@ -1,13 +1,8 @@
-# Azure Terraform Landing Zone
-
-A modular Azure Landing Zone built with Terraform to demonstrate Infrastructure as Code (IaC), Azure networking, monitoring, governance, security, storage, and data services.
-
 ## Architecture
 
 ![Azure Terraform Landing Zone Architecture](docs/landingzone_diagram_cleaned.png)
 
 ## Overview
-
 This project provisions an Azure landing zone across four dedicated resource groups:
 
 - **network-group** – Virtual networks, subnets, and network governance
