@@ -2,7 +2,7 @@
 
 ![Azure Terraform Landing Zone Architecture](docs/landingzone_diagram_cleaned.png)
 
-This project deploys a modular Azure Landing Zone using Terraform with dedicated networking, governance, monitoring, security, storage, and data platform components.
+This project deploys a modular Azure Landing Zone using Terraform...
 
 Key capabilities include:
 
@@ -14,6 +14,7 @@ Key capabilities include:
 - Azure Key Vault
 - Azure Storage and Data Lake Gen2
 - Azure SQL environments
+
 ## Networking
 
 ### Hub VNet
