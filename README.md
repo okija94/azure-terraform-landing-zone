@@ -2,14 +2,18 @@
 
 ![Azure Terraform Landing Zone Architecture](docs/landingzone_diagram_cleaned.png)
 
-## Overview
-This project provisions an Azure landing zone across four dedicated resource groups:
+This project deploys a modular Azure Landing Zone using Terraform with dedicated networking, governance, monitoring, security, storage, and data platform components.
 
-- **network-group** – Virtual networks, subnets, and network governance
-- **logging-group** – Centralized Log Analytics workspace
-- **storage-group** – Data engineering storage resources
-- **security-group** – Security monitoring, Key Vault, Storage Account, and Azure SQL resources
+Key capabilities include:
 
+- Modular Terraform architecture
+- Virtual network segmentation
+- Network Security Groups (NSGs)
+- Azure Policy governance
+- Azure Log Analytics workspaces
+- Azure Key Vault
+- Azure Storage and Data Lake Gen2
+- Azure SQL environments
 ## Networking
 
 ### Hub VNet
